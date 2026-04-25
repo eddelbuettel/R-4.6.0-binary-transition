@@ -61,6 +61,8 @@ _focussed_.
 
 ### Detecting Packages Needing a Rebuild
 
+#### Binary API
+
 One way is to use GitHub and to search the (inofficial) CRAN mirror as
 [Jeroen](https://github.com/jeroen) (who looks after
 [r-universe](https://r-universe.dev/search) and I discussed:
@@ -100,6 +102,14 @@ Of course, this also finds old packages one may have installed that are no longe
 
 I plan to run something like the above over the ~ 1200 packages inside Debian.
 
+#### GraphicsEngine
+
+This aspect we realized earlier and already did partial rebuilds inside Debian. It is also easier to
+find package using the one (exported, public) accessor from a public header:
+
+- [`R_GE_checkVersionOrDie`](https://github.com/search?q=org%3Acran+R_GE_checkVersionOrDie&type=code)  
+  devoid, unigd, Cairo, RSVGTipsDevice, ragg, rscproxy, svglite, RSvgDevice, tikzDevice, vdiffr,
+  ggiraph, devEMF, qtutils, cairoDevice, R2SWF, magick, rvg, JuniperKernel
 
 ### Who Do You Care ?
 
