@@ -1,21 +1,22 @@
 
 ## R 4.6.0 binary transition
 
-### Context
+### What is the Context
 
-R 4.6.0 was released yesterday. It brought changes to the header files which impact the run-time of
-installed and pre-made packages.
+R 4.6.0 was released yesterday (ie on April 24, 2026). It brought changes to the header files which
+impact the run-time of installed and pre-made packages.
 
 Why you ask? Well, the R Core team has for decades shipped R with C language headers containing
-functions and variables it considered private. Consider it a 'global marshmallow test': "We told you
-all not to eat these."  Other people, myself included, consider _each published API header_ a
-'contract' and view shipping it as both an implicit contract to not alter these headers with an
-honour code to provide backwards compatibility. R, once again, is different.
+(some) functions and variables it considered private (among many other public ones). Consider it a
+'global marshmallow test': "We told you all not to eat these."  Other people, myself included,
+consider _each published API header_ a 'contract' and view shipping it as both an implicit contract
+to not alter these headers with an honour code to provide backwards compatibility. R, once again, is
+different.
 
-There is no point now debating this _at nauseum_. Many of us tried to precent this, but the release
-was made the it was. Going forward, we will have a cleaner understanding (and improved seperation of
-_public_ installed header and _private_ compile-time only source headers) which is nice. But we also
-have breakage now nice. Which is not nice.  
+There is no point now debating this _at nauseum_. Many of us tried to prevent this, but the release
+was made the way it was. Going forward, we will have a cleaner understanding (and improved
+seperation of _public_ installed header and _private_ compile-time only source headers) which is
+nice. But we also have breakage now. Which is not nice.  
 
 ### So What Happens?
 
@@ -31,9 +32,10 @@ Execution halted
 root@e47199f8b6fd:/# 
 ```
 
-The same thiing happens on every installation containing locally compiled packages. I upgraded to R
-4.6.0 on my Ubuntu machine, and packages like `data.table` or `RSQLite` (because of `rlang`) no
-longer loaded (so CRANberries was down).  A quick local compilation helped.
+The same thing happens on every installation containing locally compiled packages touching removed
+symbols or functions. I upgraded to R 4.6.0 on my Ubuntu machine, and packages like `data.table` or
+`RSQLite` (because of `rlang`) no longer loaded (so CRANberries was down).  A quick local
+compilation helped. 
 
 ### How Big A Deal ?
 
@@ -46,18 +48,20 @@ We also now a good handful of packages implementing a 'graphics device' need to 
 for the graphics engine. It moved from 16 to 17 so these need help.
 
 If I had to guess now as this endeavour starts, I'd venture we probably need to update several dozen
-packages.  Which would be manageable, and quicker than rebuilding all, or all 5100.
+packages.  Which would be manageable, and quicker than rebuilding all, or all 5100, or even blindly
+all 23000.  The change impacts and small, but widely used, subset. But updating the small subset
+_quickly_ we can hopefully minimize overall pain.
 
 ### So What Now?
 
 I am trying to collect best practices here for addressing this at scale and reliably. I have to do
-for my machines, but also for the set of 100k packages in
+this for my machines, but also for the set of 100k packages in
 [r2u](https://github.com/eddelbuettel/r2u), and sort out with my fellow Debian developers what we do
-inside the distro. I maintain that we can this efficiently and surgically. Other, such as my friend
+inside the distro. I maintain that we can this efficiently and surgically. Others, such as my friend
 [Iñaki](https://github.com/enchufa2) who looks after
 [cran2copr](https://copr.fedorainfracloud.org/coprs/iucar/cran/) prefer to rebuild
 everything. Again, different folks can come to different conclusions but I prefer _narrow_ and
-_focussed_.
+_focussed_ approaches.
 
 ### Detecting Packages Needing a Rebuild
 
