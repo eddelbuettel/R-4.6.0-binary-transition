@@ -131,6 +131,27 @@ release 'alpha', 'beta' and 'rc' of 4.6.0 in unstable, recent builds are ok). Pe
 Debian we may only need to rebuild package `lobstr` aka `r-cran-lobstr`.  For r2u I have more work
 to do but will get to it as well.
 
+#### Result for Debian 'unstable'
+
+```r
+> pkgs[Debian==TRUE & Loads_Unstable==FALSE,Package]
+[1] "lobstr"
+> 
+```
+
+#### Results for Ubuntu 26.04 with `r2u`
+
+```r
+> pkgs[Loads_26.04==FALSE, Package]   # Ubuntu via r2u
+ [1] "lidR"        "treesitter"  "rlang"       "vctrs"       "lobstr"      "lazyeval"   
+ [7] "igraph"      "leidenAlg"   "archive"     "sparsevctrs" "vroom"       "arrow"      
+[13] "box"        
+> 
+```
+
+Note that this set gets shorter once we update `rlang` as several packages
+then load.
+
 
 ### Who Do You Care ?
 
