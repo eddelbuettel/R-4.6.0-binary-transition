@@ -72,17 +72,17 @@ One way is to use GitHub and to search the (inofficial) CRAN mirror as
 [r-universe](https://r-universe.dev/search) and I discussed:
 
 - [`#if R_VERSION >= R_Version(4, 6, 0)`](https://github.com/search?q=org%3Acran%20%22%23if%20R_VERSION%20%3E%3D%20R_Version(4%2C%206%2C%200)%22&type=code)  
-  lidr, treesitter, rlang, vctrs, lobstr, lazyeval, nanoarrow, tidyCpp, qs2, igraph, QuickJSR, Rcpp,
+  lidR, treesitter, rlang, vctrs, lobstr, lazyeval, nanoarrow, tidyCpp, qs2, igraph, QuickJSR, Rcpp,
   rlas, leidenAlg, collections, cpp11, archive, spaMM
   
 - [`#if R_VERSION >= R_Version(4,6,0)`](https://github.com/search?q=org%3Acran+%22%23if+R_VERSION+%3E%3D+R_Version%284%2C6%2C0%29%22&type=code)  
   rJava, iotools
   
 - [`#if R_VERSION < R_Version(4,6,0)`](https://github.com/search?q=org%3Acran+%22%23if+R_VERSION+%3C+R_Version%284%2C6%2C0%29%22&type=code)  
-  RApiDatetime, Rcpp, RProtoBuf, 
+  RApiDatetime, RProtoBuf, 
 
 - [`#if R_VERSION < R_Version(4, 6, 0)`](https://github.com/search?q=org%3Acran+%22%23if+R_VERSION+%3C+R_Version%284%2C+6%2C+0%29%22&type=code)  
-  sparsevctrs, data.table, vroom, arrow, lidR, checkmate, box, vetr, renv, tkrplot, treesitter
+  sparsevctrs, data.table, vroom, arrow, checkmate, box, vetr, renv, tkrplot
   
 (Note that I removed double-counts here.)  That is a conservative guess. E.g. on my machine I can
 load e.g. `arrow` and `archive` just fine but e.g. `lidR` fails.
