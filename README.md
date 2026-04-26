@@ -1,24 +1,27 @@
 
 ## R 4.6.0 binary transition
 
+TL,DR: Jump to [Results !!](https://github.com/eddelbuettel/R-4.6.0-binary-transition/tree/master#results-)
+
 ### What is the Context
 
-R 4.6.0 was released yesterday (ie on April 24, 2026). It brought changes to the header files which
-impact the run-time of installed and pre-made packages.
+R 4.6.0 was released on April 24, 2026. It brought changes to the header files which impact the
+run-time of installed and pre-made packages.
 
 Why you ask? Well, the R Core team has for decades shipped R with C language headers containing
 (some) functions and variables it considered private (among many other public ones). Consider it a
 'global marshmallow test': "We told you all not to eat these."  Other people, myself included,
 consider _each published API header_ a 'contract' and view shipping it as both an implicit contract
 to not alter these headers with an honour code to provide backwards compatibility. R, once again, is
-different.
+different. (To be plain, I understand where they are coming from, I disagree about releasing this
+way.)
 
 There is no point now debating this _at nauseum_. Many of us tried to prevent this, but the release
 was made the way it was. Going forward, we will have a cleaner understanding (and improved
-seperation of _public_ installed header and _private_ compile-time only source headers) which is
-nice. But we also have breakage now. Which is not nice.  
+seperation) of _public_ installed header and _private_ compile-time only source headers which is
+nice and helpful. But we also have some obvious breakage now. Which is not nice.  
 
-### So What Happens?
+### So What Happens ?
 
 Consider this simple illustration of R 4.6.0 in the updated r-base container.  After install
 `data.table` or `rlang` as a binary, it fails to load:
@@ -34,8 +37,9 @@ root@e47199f8b6fd:/#
 
 The same thing happens on every installation containing locally compiled packages touching removed
 symbols or functions. I upgraded to R 4.6.0 on my Ubuntu machine, and packages like `data.table` or
-`RSQLite` (because of `rlang`) no longer loaded (so CRANberries was down).  A quick local
-compilation helped. 
+`RSQLite` (because of `rlang`) no longer loaded (so
+e.g. [CRANberries](https://dirk.eddelbuettel.com/cranberries/) was briefly out of sorts).  A quick
+local compilation helped.
 
 ### How Big A Deal ?
 
@@ -45,14 +49,14 @@ towards this.  Of course, non-CRAN code is also affected but less reachable. It 
 but I already received email asking for help on one such package.
 
 We also now a good handful of packages implementing a 'graphics device' need to honour the API code
-for the graphics engine. It moved from 16 to 17 so these need help.
+for the graphics engine. That code moved from 16 to 17 so these need help.
 
 If I had to guess now as this endeavour starts, I'd venture we probably need to update several dozen
 packages.  Which would be manageable, and quicker than rebuilding all, or all 5100, or even blindly
 all 23000.  The change impacts and small, but widely used, subset. But updating the small subset
 _quickly_ we can hopefully minimize overall pain.
 
-### So What Now?
+### So What Now ?
 
 I am trying to collect best practices here for addressing this at scale and reliably. I have to do
 this for my machines, but also for the set of 100k packages in
@@ -114,6 +118,19 @@ find package using the one (exported, public) accessor from a public header:
 - [`R_GE_checkVersionOrDie`](https://github.com/search?q=org%3Acran+R_GE_checkVersionOrDie&type=code)  
   devoid, unigd, Cairo, RSVGTipsDevice, ragg, rscproxy, svglite, RSvgDevice, tikzDevice, vdiffr,
   ggiraph, devEMF, qtutils, cairoDevice, R2SWF, magick, rvg, JuniperKernel
+
+### Results !!
+
+I used containers for, respectively, Ubuntu 26.04 and Debian. The containers `rocker/r2u:26.04` as
+well as `rocker/r-base` (aka the official `r-base`) work well for this. I used what is in the
+snippet files [code.R](code.R) and [code.sh](code.sh) in two interactive sessions. I started from
+the list of packages indicated above and then added column by column to file
+[packages.csv](packages.csv). And it has the good: for Debian, and relying on `unstable` we are in
+better shape than I thought. `rlang` and `data.table` are already rebuilt (given that we had weekly
+release 'alpha', 'beta' and 'rc' of 4.6.0 in unstable, recent builds are ok). Per this analysis, in
+Debian we may only need to rebuild package `lobstr` aka `r-cran-lobstr`.  For r2u I have more work
+to do but will get to it as well.
+
 
 ### Who Do You Care ?
 
