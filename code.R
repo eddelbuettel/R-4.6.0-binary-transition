@@ -14,7 +14,9 @@ fwrite(p[, .(Package, Version)], "packages.csv")
 ## switch to code.sh and install some packages in Ubuntu 26.04, then
 pkgs <- fread("packages.csv")
 pkgs[, Binary := paste0("r-cran-", tolower(Package)), by="Package"]
-pkpg[, Loads_26.04 := suppressMessages(require(Package, character.only=TRUE, quietly=TRUE)), by="Package"]
+pkps[, Loads_26.04 := suppressMessages(require(Package, character.only=TRUE, quietly=TRUE)), by="Package"]
+pkgs[, Resolute_Version := as.character(system(paste("apt-cache show", Binary, "| awk '/Version/ {print $2}' | head -1"), intern=TRUE)), by=Binary]
+
 
 fwrite(pkgs, "packages.csv")
 
