@@ -40,3 +40,6 @@ ign <- pkgs[Debian == TRUE, system(paste("apt-get -y -t unstable --no-install-re
 pkps[Debian == TRUE, Loads_Unstable := suppressMessages(require(Package, character.only=TRUE, quietly=TRUE)), by="Package"]
 
 fwrite(pkgs, "packages.csv")
+
+## Table, omitting cols 3 and 5
+tinytable::tt(pkgs[,-c(3,5)]) |> tinytable::theme_markdown(style="gfm")

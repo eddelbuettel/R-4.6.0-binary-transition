@@ -154,39 +154,39 @@ then load.
 
 #### Results Table
 
-|Package      |Version   |Binary              |Loads_26.04 |Debian |Loads_Unstable |
-|:------------|:---------|:-------------------|:-----------|:------|:--------------|
-|lidR         |4.3.2     |r-cran-lidr         |FALSE       |FALSE  |NA             |
-|treesitter   |0.3.2     |r-cran-treesitter   |FALSE       |FALSE  |NA             |
-|rlang        |1.2.0     |r-cran-rlang        |FALSE       |TRUE   |TRUE           |
-|vctrs        |0.7.3     |r-cran-vctrs        |FALSE       |TRUE   |TRUE           |
-|lobstr       |1.2.1     |r-cran-lobstr       |FALSE       |TRUE   |FALSE          |
-|lazyeval     |0.2.3     |r-cran-lazyeval     |FALSE       |TRUE   |TRUE           |
-|nanoarrow    |0.8.0     |r-cran-nanoarrow    |TRUE        |TRUE   |TRUE           |
-|tidyCpp      |0.0.11    |r-cran-tidycpp      |TRUE        |FALSE  |NA             |
-|qs2          |0.2.0     |r-cran-qs2          |TRUE        |FALSE  |NA             |
-|igraph       |2.3.0     |r-cran-igraph       |FALSE       |TRUE   |TRUE           |
-|QuickJSR     |1.9.2     |r-cran-quickjsr     |TRUE        |TRUE   |TRUE           |
-|Rcpp         |1.1.1-1.1 |r-cran-rcpp         |TRUE        |TRUE   |TRUE           |
-|rlas         |1.8.6     |r-cran-rlas         |TRUE        |FALSE  |NA             |
-|leidenAlg    |1.1.7     |r-cran-leidenalg    |FALSE       |FALSE  |NA             |
-|collections  |0.3.12    |r-cran-collections  |TRUE        |FALSE  |NA             |
-|cpp11        |0.5.4     |r-cran-cpp11        |TRUE        |TRUE   |TRUE           |
-|archive      |1.1.13    |r-cran-archive      |FALSE       |FALSE  |NA             |
-|spaMM        |4.6.65    |r-cran-spamm        |TRUE        |FALSE  |NA             |
-|rJava        |1.0-18    |r-cran-rjava        |TRUE        |TRUE   |TRUE           |
-|iotools      |0.4-0     |r-cran-iotools      |TRUE        |FALSE  |NA             |
-|RApiDatetime |0.0.11    |r-cran-rapidatetime |TRUE        |FALSE  |NA             |
-|RProtoBuf    |0.4.26    |r-cran-rprotobuf    |TRUE        |TRUE   |TRUE           |
-|sparsevctrs  |0.3.6     |r-cran-sparsevctrs  |FALSE       |TRUE   |TRUE           |
-|data.table   |1.18.2.1  |r-cran-data.table   |TRUE        |TRUE   |TRUE           |
-|vroom        |1.7.1     |r-cran-vroom        |FALSE       |TRUE   |TRUE           |
-|arrow        |23.0.1.2  |r-cran-arrow        |FALSE       |TRUE   |TRUE           |
-|checkmate    |2.3.4     |r-cran-checkmate    |TRUE        |TRUE   |TRUE           |
-|box          |1.2.2     |r-cran-box          |FALSE       |FALSE  |NA             |
-|vetr         |0.2.21    |r-cran-vetr         |TRUE        |FALSE  |NA             |
-|renv         |1.2.2     |r-cran-renv         |TRUE        |TRUE   |TRUE           |
-|tkrplot      |0.0-32    |r-cran-tkrplot      |TRUE        |TRUE   |TRUE           |
+| Package      | Version   | Loads_26.04 | Debian | Unstable_Version | Loads_Unstable |
+|--------------|-----------|-------------|--------|------------------|----------------|
+| lidR         | 4.3.2     | FALSE       | FALSE  |                  | NA             |
+| treesitter   | 0.3.2     | FALSE       | FALSE  |                  | NA             |
+| rlang        | 1.2.0     | FALSE       | TRUE   | 1.2.0-2          | TRUE           |
+| vctrs        | 0.7.3     | FALSE       | TRUE   | 0.7.3-1          | TRUE           |
+| lobstr       | 1.2.1     | FALSE       | TRUE   | 1.2.0-1          | FALSE          |
+| lazyeval     | 0.2.3     | FALSE       | TRUE   | 0.2.2-2          | TRUE           |
+| nanoarrow    | 0.8.0     | TRUE        | TRUE   | 0.8.0-1          | TRUE           |
+| tidyCpp      | 0.0.11    | TRUE        | FALSE  |                  | NA             |
+| qs2          | 0.2.0     | TRUE        | FALSE  |                  | NA             |
+| igraph       | 2.3.0     | FALSE       | TRUE   | 2.2.3-1          | TRUE           |
+| QuickJSR     | 1.9.2     | TRUE        | TRUE   | 1.9.0-1          | TRUE           |
+| Rcpp         | 1.1.1-1.1 | TRUE        | TRUE   | 1.1.1-1.1-1      | TRUE           |
+| rlas         | 1.8.6     | TRUE        | FALSE  |                  | NA             |
+| leidenAlg    | 1.1.7     | FALSE       | FALSE  |                  | NA             |
+| collections  | 0.3.12    | TRUE        | FALSE  |                  | NA             |
+| cpp11        | 0.5.4     | TRUE        | TRUE   | 0.5.4-2          | TRUE           |
+| archive      | 1.1.13    | FALSE       | FALSE  |                  | NA             |
+| spaMM        | 4.6.65    | TRUE        | FALSE  |                  | NA             |
+| rJava        | 1.0-18    | TRUE        | TRUE   | 1.0-18-1         | TRUE           |
+| iotools      | 0.4-0     | TRUE        | FALSE  |                  | NA             |
+| RApiDatetime | 0.0.11    | TRUE        | FALSE  |                  | NA             |
+| RProtoBuf    | 0.4.26    | TRUE        | TRUE   | 0.4.25-1         | TRUE           |
+| sparsevctrs  | 0.3.6     | FALSE       | TRUE   | 0.3.6-1          | TRUE           |
+| data.table   | 1.18.2.1  | TRUE        | TRUE   | 1.18.2.1+dfsg-3  | TRUE           |
+| vroom        | 1.7.1     | FALSE       | TRUE   | 1.7.1-1          | TRUE           |
+| arrow        | 23.0.1.2  | FALSE       | TRUE   | 23.0.1-11        | TRUE           |
+| checkmate    | 2.3.4     | TRUE        | TRUE   | 2.3.4-1          | TRUE           |
+| box          | 1.2.2     | FALSE       | FALSE  |                  | NA             |
+| vetr         | 0.2.21    | TRUE        | FALSE  |                  | NA             |
+| renv         | 1.2.2     | TRUE        | TRUE   | 1.2.2-1          | TRUE           |
+| tkrplot      | 0.0-32    | TRUE        | TRUE   | 0.0.32-1         | TRUE           | 
 
 
 NB: This omits two columns for space reasons. See the [full csv](packages.csv) for all data.
