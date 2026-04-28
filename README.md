@@ -217,6 +217,9 @@ We find seven out of 519 packages failing. The following table contains them.
 
 (Rmpi is my package, the failure may be unrelated. Ditto for RQuantLib.)
 
+Update: RQuantLib has now been rebuilt against the current libquantlib and works as expected; this
+was unrelated to R.
+
 ### Who Do You Care ?
 
 I have been looking after Debian's R package since the late 1990s, maintaining a large number of
