@@ -28,7 +28,7 @@ Consider this simple illustration of R 4.6.0 in the updated r-base container.  A
 
 ```
 root@e47199f8b6fd:/# Rscript -e 'library(rlang)'
-Error: package or namespace load failed for ‘rlang’ in dyn.load(file, DLLpath = DLLpath, ...):
+Error: package or namespace load failed for ‘rlang’ in dyn.load(file, DLLpath=DLLpath, ...):
  unable to load shared object '/usr/lib/R/site-library/rlang/libs/rlang.so':
   /usr/lib/R/site-library/rlang/libs/rlang.so: undefined symbol: SETLENGTH
 Execution halted
@@ -108,7 +108,8 @@ done) 2>&1 | grep 'undefined symbol'
 Of course, this also finds old packages one may have installed that are no longer on CRAN
 (e.g. `pryr` for me) or packages that never were on CRAN one may have installed.
 
-I plan to run something like the above over the ~ 1200 packages inside Debian.
+I plan to run something like the above over the ~ 1200 packages inside Debian. [Edit: Now done, see
+below in [Results !!]((https://github.com/eddelbuettel/R-4.6.0-binary-transition/tree/master#results-))
 
 #### GraphicsEngine
 
