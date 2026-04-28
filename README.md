@@ -188,8 +188,33 @@ then load.
 | renv         | 1.2.2     | TRUE        | TRUE   | 1.2.2-1          | TRUE           |
 | tkrplot      | 0.0-32    | TRUE        | TRUE   | 0.0.32-1         | TRUE           | 
 
-
 NB: This omits two columns for space reasons. See the [full csv](packages.csv) for all data.
+
+#### Debian Bulk Check
+
+We use an [additional script](debian_bulk_check.R) to 'bulk check' all `r-cran-*` package in Debian
+that contain compiled code. The reasoning is that non-binary package cannot be affected by the
+header change, only binary ones can.
+
+We left some comments in the file that should explain the code. In brief we find that Debian
+(currently) has 591 non-binary packages (that we ignore per the previous paragraph) and 519 binary
+package. So in a loop we install all 519 first, and then in a second loop check each for whether it
+'loads' into an R session. A share library with missing symbols (as in the `lobstr` example) will
+fail this immediately.
+
+We find seven out of 519 packages failing. The following table contains them.
+
+| Package    | Version | NeedsCompilation | lcpkg             | loads |
+|------------|---------|------------------|-------------------|-------|
+| gstat      | 2.1-6   | yes              | r-cran-gstat      | FALSE |
+| lobstr     | 1.2.1   | yes              | r-cran-lobstr     | FALSE |
+| reticulate | 1.46.0  | yes              | r-cran-reticulate | FALSE |
+| Rmpi       | 0.7-3.4 | yes              | r-cran-rmpi       | FALSE |
+| RQuantLib  | 0.4.26  | yes              | r-cran-rquantlib  | FALSE |
+| Rsymphony  | 0.1-33  | yes              | r-cran-rsymphony  | FALSE |
+| Seurat     | 5.5.0   | yes              | r-cran-seurat     | FALSE | 
+
+(Rmpi is my package, the failure may be unrelated. Ditto for RQuantLib.)
 
 ### Who Do You Care ?
 
