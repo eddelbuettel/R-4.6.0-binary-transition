@@ -217,8 +217,9 @@ We find seven out of 519 packages failing. The following table contains them.
 
 (Rmpi is my package, the failure may be unrelated. Ditto for RQuantLib.)
 
-Update: RQuantLib has now been rebuilt against the current libquantlib and works as expected; this
-was unrelated to R.
+Updates: RQuantLib has now been rebuilt against the current libquantlib and works as expected; this
+was unrelated to R. Bug reports asking for updates/rebuilds of `lobstr` and `reticulate` have been
+filed.
 
 ### Who Do You Care ?
 
