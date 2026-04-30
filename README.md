@@ -117,8 +117,11 @@ This aspect we realized earlier and already did partial rebuilds inside Debian. 
 find packages using the one (exported, public) accessor from a public header:
 
 - [`R_GE_checkVersionOrDie`](https://github.com/search?q=org%3Acran+R_GE_checkVersionOrDie&type=code)  
-  devoid, unigd, Cairo, RSVGTipsDevice, ragg, rscproxy, svglite, RSvgDevice, tikzDevice, vdiffr,
-  ggiraph, devEMF, qtutils, cairoDevice, R2SWF, magick, rvg, JuniperKernel
+  devoid, unigd, Cairo, ragg, svglite, tikzDevice, vdiffr, ggiraph, devEMF, magick, rvg
+
+plus 'false positives' packages RSVGTipsDevice, rscproxy, RSvgDevice, qtutils, cairoDevice, R2SWF,
+JuniperKernel which match the condition but are no longer on CRAN.
+
 
 ### Results !!
 
