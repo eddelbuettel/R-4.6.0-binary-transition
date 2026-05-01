@@ -192,7 +192,20 @@ then load.
 | renv         | 1.2.2     | TRUE        | TRUE   | 1.2.2-1          | TRUE           |
 | tkrplot      | 0.0-32    | TRUE        | TRUE   | 0.0.32-1         | TRUE           | 
 
-NB: This omits two columns for space reasons. See the [full csv](packages.csv) for all data.
+NB: This omits two columns for space reasons. See the [full csv](packages.csv) for all data. 
+The entry for box is a false positive as it errors on load by its choice.
+
+#### Outcome
+
+Based on the analysis presented above, we successfully accommodated the R 4.6.0 requirement by
+explicitly rebuilding packages
+
+    data.table box rlang vctrs lobstr lazyeval treesitter lidR vroom
+    
+as well as the (active) packages with a graphis engine check
+
+    devoid unigd Cairo ragg svglite tikzDevice vdiffr ggiraph devEMF magick rvg
+
 
 #### Debian Bulk Check
 
