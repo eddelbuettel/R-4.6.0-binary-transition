@@ -206,6 +206,8 @@ as well as the (active) packages with a graphis engine check
 
     devoid unigd Cairo ragg svglite tikzDevice vdiffr ggiraph devEMF magick rvg
 
+Following a bug report, we also updated package this.path which used a local wrapper for the version
+comparison escaping our initial filter.
 
 #### Debian Bulk Check
 
