@@ -1,7 +1,7 @@
 
 ## R 4.6.0 binary transition
 
-TL,DR: Jump to [Results !!](https://github.com/eddelbuettel/R-4.6.0-binary-transition/tree/master#results-)
+TL,DR: Jump to [Results !!][results] or [Outcome][outcome]
 
 ### What is the Context
 
@@ -37,9 +37,8 @@ root@e47199f8b6fd:/#
 
 The same thing happens on every installation containing locally compiled packages touching removed
 symbols or functions. I upgraded to R 4.6.0 on my Ubuntu machine, and packages like `data.table` or
-`RSQLite` (because of `rlang`) no longer loaded (so
-e.g. [CRANberries](https://dirk.eddelbuettel.com/cranberries/) was briefly out of sorts).  A quick
-local compilation helped.
+`RSQLite` (because of `rlang`) no longer loaded (so e.g. [CRANberries][cranberries] was briefly out
+of sorts).  A quick local compilation helped.
 
 ### How Big A Deal ?
 
@@ -48,8 +47,8 @@ R-only packages are not affected. For the 5100 others we need a search tool. Thi
 towards this.  Of course, non-CRAN code is also affected but less reachable. It has been one day,
 but I already received email asking for help on one such package.
 
-We also now have a good handful of packages implementing a 'graphics device' needing to honour the API code
-for the graphics engine. That code moved from 16 to 17 so these need help.
+We also now have a good handful of packages implementing a 'graphics device' needing to honour the
+API code for the graphics engine. That code moved from 16 to 17 so these need help.
 
 If I had to guess now as this endeavour starts, I'd venture we probably need to update several dozen
 packages.  Which would be manageable, and quicker than rebuilding all, or all 5100, or even blindly
@@ -59,21 +58,18 @@ _quickly_ we can hopefully minimize overall pain.
 ### So What Now ?
 
 I am trying to collect best practices here for addressing this at scale and reliably. I have to do
-this for my machines, but also for the set of 100k packages in
-[r2u](https://github.com/eddelbuettel/r2u), and sort out with my fellow Debian developers what we do
-inside the distro. I maintain that we can do this efficiently and surgically. Others, such as my friend
-[Iñaki](https://github.com/enchufa2) who looks after
-[cran2copr](https://copr.fedorainfracloud.org/coprs/iucar/cran/) prefer to rebuild
-everything. Again, different folks can come to different conclusions, but I prefer _narrow_ and
-_focussed_ approaches.
+this for my machines, but also for the set of 100k packages in [r2u][r2u], and sort out with my
+fellow Debian developers what we do inside the distro. I maintain that we can do this efficiently
+and surgically. Others, such as my friend [Iñaki][inaki] who looks after [cran2copr][cran2copr]
+prefers to rebuild everything. Again, different folks can come to different conclusions, but I prefer
+_narrow_ and _focussed_ approaches.
 
 ### Detecting Packages Needing a Rebuild
 
 #### Binary API
 
-One way is to use GitHub and to search the (unofficial) CRAN mirror as
-[Jeroen](https://github.com/jeroen) (who looks after
-[r-universe](https://r-universe.dev/search) and I discussed:
+One way is to use GitHub and to search the (unofficial) CRAN mirror as [Jeroen][jeroen] (who looks
+after [r-universe][r-universe]) and I discussed:
 
 - [`#if R_VERSION >= R_Version(4, 6, 0)`](https://github.com/search?q=org%3Acran%20%22%23if%20R_VERSION%20%3E%3D%20R_Version(4%2C%206%2C%200)%22&type=code)  
   lidR, treesitter, rlang, vctrs, lobstr, lazyeval, nanoarrow, tidyCpp, qs2, igraph, QuickJSR, Rcpp,
@@ -109,7 +105,7 @@ Of course, this also finds old packages one may have installed that are no longe
 (e.g. `pryr` for me) or packages that never were on CRAN one may have installed.
 
 I plan to run something like the above over the ~ 1200 packages inside Debian. [Edit: Now done, see
-below in [Results !!]((https://github.com/eddelbuettel/R-4.6.0-binary-transition/tree/master#results-))
+below in [Results !!][results].]
 
 #### GraphicsEngine
 
@@ -206,8 +202,24 @@ as well as the (active) packages with a graphis engine check
 
     devoid unigd Cairo ragg svglite tikzDevice vdiffr ggiraph devEMF magick rvg
 
-Following a bug report, we also updated package this.path which used a local wrapper for the version
-comparison escaping our initial filter.
+Following a bug report, we also updated package 
+
+    this.path 
+   
+which used a local wrapper for the version comparison escaping our initial filter.  When building
+package we also noticed packages
+
+    tidygraph tweenr
+   
+referencing a removed symbol and hence requiring a rebuild.
+
+Given the DDOS attach on Ubuntu and Launchpad, we had to place 'jammy' binaries (for now) in a
+(temporary) [release in this repo][jammy_adhoc_release]. This allowed us to complete container
+builds and all three supported LTS release in r2u now cover R 4.6.0.
+   
+This completes the transition. There may still be a package or two or two coming up as needed a
+rebuild, which we will do as needed. But by and large, a narrower and focussed upgrade is possible,
+and has been undertaken. 
 
 #### Debian Bulk Check
 
@@ -244,3 +256,13 @@ filed.
 I have been looking after Debian's R package since the late 1990s, maintaining a large number of
 CRAN packages inside Debian, am a co-creator of the Rocker project where I look after a number of
 R-based containers, and of late have been building r2u with its Ubuntu CRAN binaries.
+
+[results]: https://github.com/eddelbuettel/R-4.6.0-binary-transition/tree/master#results-
+[outcome]: https://github.com/eddelbuettel/R-4.6.0-binary-transition/tree/master#outcome-
+[cranberries]: https://dirk.eddelbuettel.com/cranberries/
+[r2u]: https://github.com/eddelbuettel/r2u
+[inaki]: https://github.com/enchufa2
+[cran2copr]: https://copr.fedorainfracloud.org/coprs/iucar/cran/
+[jeroen]: https://github.com/jeroen
+[r-universe]: https://r-universe.dev/search
+[jammy_adhoc_release]: https://github.com/eddelbuettel/R-4.6.0-binary-transition/releases/tag/4.6.0-2.2204.0
