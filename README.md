@@ -258,7 +258,7 @@ CRAN packages inside Debian, am a co-creator of the Rocker project where I look 
 R-based containers, and of late have been building r2u with its Ubuntu CRAN binaries.
 
 [results]: https://github.com/eddelbuettel/R-4.6.0-binary-transition/tree/master#results-
-[outcome]: https://github.com/eddelbuettel/R-4.6.0-binary-transition/tree/master#outcome-
+[outcome]: https://github.com/eddelbuettel/R-4.6.0-binary-transition/tree/master#outcome
 [cranberries]: https://dirk.eddelbuettel.com/cranberries/
 [r2u]: https://github.com/eddelbuettel/r2u
 [inaki]: https://github.com/enchufa2
