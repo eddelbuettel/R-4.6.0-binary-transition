@@ -251,6 +251,12 @@ Updates: RQuantLib has now been rebuilt against the current libquantlib and work
 was unrelated to R. Bug reports asking for updates/rebuilds of `lobstr` and `reticulate` have been
 filed.
 
+#### Final Result
+
+As of 31 May 2026 `r-base` and its sibbling packages are now in testing.  As predicted, no bulk
+rebuild was needed.
+
+
 ### Who Do You Care ?
 
 I have been looking after Debian's R package since the late 1990s, maintaining a large number of
